@@ -25,7 +25,7 @@ export const tokenizer = (input: string) => {
     } else if (isNumber(char)) {
       tokens.push({
         type: 'number',
-        value: char,
+        value: Number(char),
       });
     } else if (isOperator(char)) {
       tokens.push({
@@ -53,6 +53,25 @@ export const parser = (tokens: Token[]): number => {
     return token;
   };
 
+  const parseParams = (): number => {
+    const token = tokens[current];
+
+    if (token.type === 'paren' && token.value === '(') {
+      eat();
+      const number = parseAdd();
+
+      if (tokens[current].type === 'paren' && tokens[current].value === ')') {
+        eat();
+      } else {
+        throw new Error('param should closed');
+      }
+
+      return number;
+    }
+
+    return parseNumber();
+  };
+
   const parseNumber = (): number => {
     const matchNum = () => {
       const startPos = current;
@@ -77,18 +96,18 @@ export const parser = (tokens: Token[]): number => {
   };
 
   const parseMulti = (): number => {
-    const left = parseNumber();
+    const left = parseParams();
     const token = tokens[current];
 
     if (token && (isTokenOperator(token, '*') || isTokenOperator(token, '/'))) {
       const operator = eat() as OperatorToken;
 
       if (operator.value === '/') {
-        return left / parseNumber();
+        return left / parseParams();
       }
 
       if (operator.value === '*') {
-        return left * parseNumber();
+        return left * parseParams();
       }
     }
     return left;

@@ -1,9 +1,13 @@
-export type TokenTypes = 'paren' | 'number' | 'operator';
 export type OperatorTypes = '*' | '^' | '-' | '+' | '/';
 
-type CommonToken = {
-  type: Exclude<TokenTypes, 'operator'>;
-  value: string;
+type NumberToken = {
+  type: 'number';
+  value: number;
+};
+
+export type ParamToken = {
+  type: 'paren';
+  value: '(' | ')';
 };
 
 export type OperatorToken = {
@@ -11,4 +15,5 @@ export type OperatorToken = {
   value: OperatorTypes;
 };
 
-export type Token = CommonToken | OperatorToken;
+export type Token = NumberToken | ParamToken | OperatorToken;
+export type TokenTypes = Token['type'];

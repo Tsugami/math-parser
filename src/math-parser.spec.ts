@@ -8,7 +8,7 @@ describe('MathParser', () => {
       const tokensExpect: Token[] = [
         {
           type: 'number',
-          value: '2',
+          value: 2,
         },
         {
           type: 'operator',
@@ -20,7 +20,7 @@ describe('MathParser', () => {
         },
         {
           type: 'number',
-          value: '5',
+          value: 5,
         },
         {
           type: 'operator',
@@ -28,7 +28,7 @@ describe('MathParser', () => {
         },
         {
           type: 'number',
-          value: '1',
+          value: 1,
         },
         {
           type: 'paren',
@@ -43,8 +43,12 @@ describe('MathParser', () => {
   describe('parser', () => {
     it('should return value sum', () => {
       const input = '2 * 5 - 1';
-
       expect(parser(tokenizer(input))).toBe(9);
+    });
+
+    it('should return value sum with params', () => {
+      const input = '2 * (5 - 1)';
+      expect(parser(tokenizer(input))).toBe(8);
     });
   });
 });
