@@ -38,6 +38,11 @@ describe('MathParser', () => {
 
       expect(tokenizer(input)).toEqual(tokensExpect);
     });
+
+    it('should throws an error when letter is provided', () => {
+      const input = '1+2+a';
+      expect(() => tokenizer(input)).toThrow('I dont know what this character is: "a"');
+    });
   });
 
   describe('parser', () => {
@@ -49,6 +54,19 @@ describe('MathParser', () => {
     it('should return value sum with params', () => {
       const input = '2 * (5 - 1)';
       expect(parser(tokenizer(input))).toBe(8);
+    });
+
+    it('should throws an error when param not is closed', () => {
+      const input = '2 * (5 - 1';
+      expect(() => parser(tokenizer(input))).toThrow('param should closed');
+    });
+
+    it('should throws an error when an operator does not have two numbers', () => {
+      const input = '2 * (5 - )';
+      expect(() => parser(tokenizer(input))).toThrow('Number not Found');
+
+      const input2 = '2 * ';
+      expect(() => parser(tokenizer(input2))).toThrow('Number not Found');
     });
   });
 });

@@ -56,11 +56,11 @@ export const parser = (tokens: Token[]): number => {
   const parseParams = (): number => {
     const token = tokens[current];
 
-    if (token.type === 'paren' && token.value === '(') {
+    if (token && token.type === 'paren' && token.value === '(') {
       eat();
       const number = parseAdd();
 
-      if (tokens[current].type === 'paren' && tokens[current].value === ')') {
+      if (tokens[current] && tokens[current].type === 'paren' && tokens[current].value === ')') {
         eat();
       } else {
         throw new Error('param should closed');
