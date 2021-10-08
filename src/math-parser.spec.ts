@@ -1,4 +1,4 @@
-import { parser, tokenizer } from './math-parser';
+import { mathParser, tokenizer } from './math-parser';
 import type { Token } from './types';
 
 describe('MathParser', () => {
@@ -47,26 +47,29 @@ describe('MathParser', () => {
 
   describe('parser', () => {
     it('should return value sum', () => {
-      const input = '2 * 5 - 1';
-      expect(parser(tokenizer(input))).toBe(9);
+      expect(mathParser('2 * 5 - 1')).toBe(9);
+      expect(mathParser('12 + 3 * 5')).toBe(27);
+      expect(mathParser('2 * ( 5 - 1 )')).toBe(8);
+      expect(mathParser('2^2 + 8 / 2')).toBe(8);
+      expect(mathParser('2^( 3 - 1)')).toBe(4);
     });
 
     it('should return value sum with params', () => {
       const input = '2 * (5 - 1)';
-      expect(parser(tokenizer(input))).toBe(8);
+      expect(mathParser(input)).toBe(8);
     });
 
     it('should throws an error when param not is closed', () => {
       const input = '2 * (5 - 1';
-      expect(() => parser(tokenizer(input))).toThrow('param should closed');
+      expect(() => mathParser(input)).toThrow('param should closed');
     });
 
     it('should throws an error when an operator does not have two numbers', () => {
       const input = '2 * (5 - )';
-      expect(() => parser(tokenizer(input))).toThrow('Number not Found');
+      expect(() => mathParser(input)).toThrow('Number not Found');
 
       const input2 = '2 * ';
-      expect(() => parser(tokenizer(input2))).toThrow('Number not Found');
+      expect(() => mathParser(input2)).toThrow('Number not Found');
     });
   });
 });

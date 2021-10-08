@@ -95,19 +95,31 @@ export const parser = (tokens: Token[]): number => {
     return Number(number);
   };
 
-  const parseMulti = (): number => {
+  const parseExponential = (): number => {
     const left = parseParams();
+    const token = tokens[current];
+
+    if (token && isTokenOperator(token, '^')) {
+      eat();
+      return left ** parseParams();
+    }
+
+    return left;
+  };
+
+  const parseMulti = (): number => {
+    const left = parseExponential();
     const token = tokens[current];
 
     if (token && (isTokenOperator(token, '*') || isTokenOperator(token, '/'))) {
       const operator = eat() as OperatorToken;
 
       if (operator.value === '/') {
-        return left / parseParams();
+        return left / parseExponential();
       }
 
       if (operator.value === '*') {
-        return left * parseParams();
+        return left * parseExponential();
       }
     }
     return left;
