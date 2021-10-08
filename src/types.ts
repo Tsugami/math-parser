@@ -1,16 +1,14 @@
-export type TokenTypes = 'paren' | 'number' | 'operator'
-export type OperatorTypes = '*' | '^' | '-' | '+' | '/'
+export type TokenTypes = 'paren' | 'number' | 'operator';
+export type OperatorTypes = '*' | '^' | '-' | '+' | '/';
 
 type CommonToken = {
-    type: Exclude<TokenTypes, 'operator'>;
-    value: string;
-}
-
+  type: Exclude<TokenTypes, 'operator'>;
+  value: string;
+};
 
 export type OperatorToken = {
-    type: 'operator';
-    value: OperatorTypes;
-}
+  type: 'operator';
+  value: OperatorTypes;
+};
 
-
-export type Token = CommonToken | OperatorToken
+export type Token = CommonToken | OperatorToken;
