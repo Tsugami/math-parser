@@ -10,7 +10,7 @@
       "isolatedModules": true,  /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
   
       "newLine": "lf", /* Specify the end of line sequence to be used when emitting files: ‘CRLF’ (dos) or ‘LF’ (unix). */
-      "noEmitHelpers": true,
+      "importHelpers": true,
       "preserveConstEnums": true,
       "pretty": true,
       "removeComments": true, /* Strips all comments from TypeScript files when converting into JavaScript */

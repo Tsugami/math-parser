@@ -133,3 +133,5 @@ export const parser = (tokens: Token[]): number => {
 
   return parseAdd();
 };
+
+export const mathParser = (input: string): number => parser(tokenizer(input));

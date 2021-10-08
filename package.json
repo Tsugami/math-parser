@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --colors --passWithNoTests  --detectOpenHandles",
     "test-watch": "yarn test --watch",
-    "lint": "eslint --fix src"
+    "lint": "eslint --fix src",
+    "start": "ts-node src/index.ts"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
@@ -20,5 +21,10 @@
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "@types/yargs": "^17.0.3",
+    "ts-node": "^10.2.1",
+    "yargs": "^17.2.1"
   }
 }
