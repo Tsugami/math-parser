@@ -1,4 +1,4 @@
-export type OperatorTypes = '*' | '^' | '-' | '+' | '/';
+export type OperatorTypes = '*' | '^' | '-' | '+' | '/' | '^';
 
 type NumberToken = {
   type: 'number';

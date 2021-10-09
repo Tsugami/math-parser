@@ -56,7 +56,7 @@ export const parser = (tokens: Token[]): number => {
   const parseParams = (): number => {
     const token = tokens[current];
 
-    while (token && token.type === 'paren' && token.value === '(') {
+    if (token && token.type === 'paren' && token.value === '(') {
       eat();
       const number = parseAdd();
 
@@ -99,7 +99,7 @@ export const parser = (tokens: Token[]): number => {
     const left = parseParams();
     const token = tokens[current];
 
-    while (token && isTokenOperator(token, '^')) {
+    if (token && isTokenOperator(token, '^')) {
       eat();
       return left ** parseParams();
     }
@@ -111,7 +111,7 @@ export const parser = (tokens: Token[]): number => {
     const left = parseExponential();
     const token = tokens[current];
 
-    while (token && (isTokenOperator(token, '*') || isTokenOperator(token, '/'))) {
+    if (token && (isTokenOperator(token, '*') || isTokenOperator(token, '/'))) {
       const operator = eat() as OperatorToken;
 
       if (operator.value === '/') {
@@ -129,7 +129,7 @@ export const parser = (tokens: Token[]): number => {
     const left = parseMulti();
     const token = tokens[current];
 
-    while (token && (isTokenOperator(token, '+') || isTokenOperator(token, '-'))) {
+    if (token && (isTokenOperator(token, '+') || isTokenOperator(token, '-'))) {
       const operator = eat() as OperatorToken;
 
       if (operator.value === '+') {
