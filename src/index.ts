@@ -16,7 +16,6 @@ yargs(hideBin(process.argv))
       });
     },
     (args) => {
-      console.log(args);
       console.log(mathParser(args.input as string));
     },
   )
